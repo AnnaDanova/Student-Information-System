@@ -1,0 +1,10 @@
+2454 2 Emil Kinchev Kinchev 3 5.7 Algebra 5.5 DIS 5.6 DSTR 6 
+2030 2 Emilia Deyanova Naydenova 4 4.625 Algebra 3.8 DIS 4.2 DSTR 4.5 UP 6 
+2767 2 Chavdar Nikolov Lilov 2 5.8 Algebra 6 DIS 5.6 
+2309 2 Aleksandar Dimitrov Stoichev 5 5.08 ALgebra 4.5 DIS 3.8 DSTR 6 UP 5.4 English 5.7 
+2044 2 Elena Andonova Stefanova 6 5.68333 Algebra 5.3 DIS 6 DSTR 5.5 UP 6 English 5.4 Prktikum 5.9 
+2579 2 Ana Rosenova Radeva 2 3.2 Algebra 3 DSTR 3.4 
+2083 2 Radoslava Filipova Filipova 4 5.4 Algebra 4.7 DIS 5.3 DSTR 5.6 UP 6 
+2121 2 Ivan Manchev Ivanov 1 6 UP 6 
+2176 2 Maria Boncheva Nikolova 3 5.16667 Algebra 5 DIS 6 DSTR 4.5 
+2551 2 Nikolay Markov Markov 4 5.25 Algebra 6 DIS 4 DSTR 5.2 UP 5.8 
