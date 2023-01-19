@@ -1,0 +1,10 @@
+4023 4 Dimitar Desislavov Peev 3 4.5 Algebra 3.8 DIS 4.7 DSTR 5 
+4488 4 Aneliq Dimitrova Todorova 2 5.6 Algebra 5.8 DIS 5.4 
+4040 4 Snejana Mario Shopova 1 4.6 DIS 4.6 
+4659 4 Boris Velikov Venev 3 5.6 Algebra 6 DIS 5.8 DSTR 5 
+4111 4 Martin Ivanov Fotev 5 4.96 Algebra 4 DIS 4.4 DSTRE 4.5 UP 6 English 5.9 
+4904 4 Daniela Viktorova Ganova 2 5.15 DIS 5 DSTR 5.3 
+4779 4 Ekaterina Kirilova Trenkova 3 5.13333 Algebra 5.4 DIS 5 DSTR 5 
+4588 4 Neli Angelova Dragomirova 1 4 DIS 4 
+4545 4 Philip Nikolaev Yanev 3 5.46667 Algebra 5 DIS 5.4 Up 6 
+4990 4 Angel Boykov Dimitrov 6 5.78333 Algebra 6 DIS 5.5 DSTR 5.7 English 6 UP 5.9 Praktikum 5.6 
