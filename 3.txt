@@ -1,0 +1,10 @@
+3078 3 Jasmin Damynova Ivanova 3 4.13333 Algebra 3.7 DIS 4.5 DSTR 4.2 
+3844 3 Aleksandar Boykov DImitrov 2 5.55 Algebra 5.1 UP 6 
+3387 3 Lazar Vasilev Panov 3 3.46667 Algebra 3.2 DIS 3.7 DSTR 3.5 
+3548 3 Mila Tosheva Emilova 2 5.15 Algebra 5.4 DSTR 4.9 
+3131 3 Vicktor Hristov Viktorov 2 5.5 Algebra 5.3 DIS 5.7 
+3474 3 Stefan Teofilov Andonov 5 5.34 Algebra 5.4 DIS 5.5 DSTR 4.7 UP 6 English 5.1 
+3000 3 Hristo Hristov Tabutov 3 5.66667 Algebra 5.6 DIS 5.9 DSTR 5.5 
+3856 3 Boyan Stefanov Uzunov 2 4.65 DIS 4.4 DSTR 4.9 
+3544 3 Silvia Kirilova Stoichkova 1 4.8 Algebra 4.8 
+3067 3 Rumen Petkov Jordanov 4 5.05 Algebra 4 DIS 5.2 DSTR 5.4 UP 5.6 
