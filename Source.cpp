@@ -67,32 +67,63 @@ void write_student_info_into_file(string file_name, Student s) {
     file.close();
 }
 
-void add_student(int group, string group_name) {
+int add_student(int group, string group_name) {
     Student student;
     double sum = 0;
     student.group = group;
     cout << "Enter the first name: " << endl;
     cin >> student.first_name;
+    if (cin.fail()) {
+        cout << "Invalid input" << endl;
+        return 1;
+    }
     cout << "Enter the middle name: " << endl;
     cin >> student.middle_name;
+    if (cin.fail()) {
+        cout << "Invalid input" << endl;
+        return 1;
+    }
     cout << "Enter the last name: " << endl;
     cin >> student.last_name;
+    if (cin.fail()) {
+        cout << "Invalid input" << endl;
+        return 1;
+    }
     cout << "Enter the faculty number: " << endl;
     cin >> student.faculty_number;
+    if (cin.fail()) {
+        cout << "Invalid input" << endl;
+        return 1;
+    }
     do {
         cout << "Number of courses (between 1 and 10): " << endl;
         cin >> student.num_of_courses;
+        if (cin.fail()) {
+            cout << "Invalid input" << endl;
+            return 1;
+        }
     } while (student.num_of_courses < 1 || student.num_of_courses > 10);
     for (int course_index = 0; course_index < student.num_of_courses; course_index++) {
         cout << "Name of course: " << endl;
         cin >> student.courses[course_index];
-        cout << "Grade: " << endl;
-        cin >> student.grades[course_index];
+        if (cin.fail()) {
+            cout << "Invalid input" << endl;
+            return 1;
+        }
+        do {
+            cout << "Grade: " << endl;
+            cin >> student.grades[course_index];
+            if (cin.fail()) {
+                cout << "Invalid input" << endl;
+                return 1;
+            }
+        } while (student.grades[course_index] < 2 || student.grades[course_index] > 6);
         sum = sum + student.grades[course_index];
     }
     student.average_grade = sum / student.num_of_courses;
     write_student_info_into_file("all.txt", student);
     write_student_info_into_file(group_name, student);
+    return 0;
 }
 
 void show_records(string file_name) {
@@ -117,11 +148,11 @@ int delete_from_all(int faculty_num, string file_name) {
     string line;
     while (getline(file, line)) {
         if (!line.empty()) {
-            string data[2];
+            string data[2];//we need only the faculty number and the group of the student
             stringstream stream(line);
-            getline(stream, data[0], ' ');
+            getline(stream, data[0], ' ');//data[0] - the faculty name
             s.faculty_number = stoi(data[0]);
-            getline(stream, data[1], ' ');
+            getline(stream, data[1], ' ');//data[1] - the group number
             s.group = stoi(data[1]);
             if (faculty_num != s.faculty_number) {
                 temp << line << endl;
@@ -135,7 +166,7 @@ int delete_from_all(int faculty_num, string file_name) {
     file.close();
     remove(file_name.c_str());
     if (rename("temp.txt", file_name.c_str()) != 0) {
-        cout << "Error while deleting";
+        cout << "Error while renaming the file";
     }
     return group;
 }
@@ -150,7 +181,7 @@ void delete_from_group(string file_name, int faculty_num) {
     string line;
     while (getline(file, line)) {
          if (!line.empty()) {
-             string data[2];
+             string data[1];//we need only the faculty number
              stringstream stream(line);
              getline(stream, data[0], ' ');
              s.faculty_number = stoi(data[0]);
@@ -163,21 +194,21 @@ void delete_from_group(string file_name, int faculty_num) {
     file.close();
     remove(file_name.c_str());
     if (rename("temp.txt", file_name.c_str()) != 0) {
-       cout << "Error while deleting";
+       cout << "Error while renaming the file";
     }
 }
 
-void edit_record(Student& r2, Student& r1) {
-    r2.faculty_number = r1.faculty_number;
-    r2.group = r1.group;
-    r2.first_name = r1.first_name;
-    r2.middle_name = r1.middle_name;
-    r2.last_name = r1.last_name;
-    r2.num_of_courses = r1.num_of_courses;
-    r2.average_grade = r1.average_grade;
-    for (int course_index = 0; course_index < r1.num_of_courses; course_index++) {
-        r2.courses[course_index] = r1.courses[course_index];
-        r2.grades[course_index] = r1.grades[course_index];
+void edit_record(Student& record2, Student& record1) {
+    record2.faculty_number = record1.faculty_number;
+    record2.group = record1.group;
+    record2.first_name = record1.first_name;
+    record2.middle_name = record1.middle_name;
+    record2.last_name = record1.last_name;
+    record2.num_of_courses = record1.num_of_courses;
+    record2.average_grade = record1.average_grade;
+    for (int course_index = 0; course_index < record1.num_of_courses; course_index++) {
+        record2.courses[course_index] = record1.courses[course_index];
+        record2.grades[course_index] = record1.grades[course_index];
     }
 }
 
@@ -188,39 +219,53 @@ void swap_students(Student &s1, Student &s2) {
     edit_record(s2, temp);
 }
 
-void sort_by_faculty_number(Student* s, int size) {
-   int i, j;
-   for (i = 0; i < size - 1; i++) {
-       for (j = 0; j < size - i - 1; j++){
-           if (s[j].faculty_number > s[j + 1].faculty_number) {
-               swap_students(s[j], s[j+1]);
+void sort_by_faculty_number(Student* s, int size, string order) {
+    for (int i = 0; i < size - 1; i++) {
+       for (int j = 0; j < size - i - 1; j++){
+           if (order == "ascending"){
+               if (s[j].faculty_number > s[j + 1].faculty_number) {
+                   swap_students(s[j], s[j + 1]);
+               }
+           }
+           else if (order == "descending") {
+               if (s[j].faculty_number < s[j + 1].faculty_number) {
+                   swap_students(s[j], s[j + 1]);
+               }
            }
        }
     }
 }
 
-void sort_by_average_grade(Student* s, int size) {
-    int i, j;
-    for (i = 0; i < size - 1; i++) {
-        for (j = 0; j < size - i - 1; j++) {
-            if (s[j].average_grade < s[j + 1].average_grade) {
-                swap_students(s[j], s[j + 1]);
+void sort_by_average_grade(Student* s, int size, string order) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (order == "ascending") {
+                if (s[j].average_grade > s[j + 1].average_grade) {
+                    swap_students(s[j], s[j + 1]);
+                }
+            }
+            else if (order == "descending") {
+                if (s[j].average_grade < s[j + 1].average_grade) {
+                    swap_students(s[j], s[j + 1]);
+                }
             }
         }
     }
 }
 
-void sort_students(string file_name, string option) {
-    Student s[25];
+void sort_students(string file_name, string option, string order) {
+    const int max_students = 200;
+    Student* s = new Student[max_students];
     ifstream file;
     file.open(file_name);
     ofstream temp;
     temp.open("temp.txt");
-    string line[25];
+    string line[max_students];
     int record_count = 0;
     while (getline(file, line[record_count])) {
         if (!line[record_count].empty()) {
-            string data[28];
+            const int max_num_of_info = 27;
+            string data[max_num_of_info];
             int i = 0;
             stringstream stream(line[record_count]);
             while (getline(stream, data[i], ' ')) {
@@ -243,19 +288,41 @@ void sort_students(string file_name, string option) {
     }
     file.close();
     if (option == "faculty_number") {
-       sort_by_faculty_number(s, record_count);
+       sort_by_faculty_number(s, record_count, order);
     }
     else {
-       sort_by_average_grade(s, record_count);
+       sort_by_average_grade(s, record_count, order);
     }
     for (int i = 0; i < record_count; i++) {
        write_student_info_into_file("temp.txt", s[i]);
     }
+    delete[] s;
     temp.close();
     remove(file_name.c_str());
     if (rename("temp.txt", file_name.c_str()) != 0) {
         cout << "Error while renaming the file";
     }
+}
+
+void combine_groups(int groups[], int size) {
+    ofstream temp;
+    temp.open("combine.txt", ios::ate);
+    for (int index = 0; index < size; index++){
+        string file_name = group_file_name(groups[index]);
+        ifstream file;
+        file.open(file_name);
+        string line;
+        while (getline(file, line)) {
+            if (!line.empty()) {
+                temp << line << '\n';
+            }
+        }
+        file.close();
+    }
+    temp.close();
+    cout << endl;
+    show_records("combine.txt");
+    cout << "Info saved in the file combine.txt " << endl;
 }
 
 int main() {
@@ -268,14 +335,23 @@ int main() {
         cout << "3.Sort by average grade" << endl;
         cout << "4.Sort by faculty number" << endl;
         cout << "5.Dispaly records" << endl;
-        cout << "6.Exit" << endl;
+        cout << "6.Combine groups" << endl;
+        cout << "7.Exit" << endl;
         cout << "Enter your choice:" << endl;
         cin >> choice;
+        if (cin.fail()) {
+            cout << "You didn't enter integer" << endl;
+            return 1;
+        }
         switch (choice) {
         case 1: {
             int group;
             cout << "Group: " << endl;
             cin >> group;
+            if (cin.fail()) {
+                cout << "Invalid input" << endl;
+                return 1;
+            }
             string group_file = group_file_name(group);
             add_student(group, group_file);
             break;
@@ -284,6 +360,10 @@ int main() {
             int faculty_num;
             cout << "Enter the faculty number: ";
             cin >> faculty_num;
+            if (cin.fail()) {
+                cout << "Invalid input" << endl;
+                return 11;;
+            }
             int group = delete_from_all(faculty_num, "all.txt");
             if (group > 0 && group < 9) {
                 string group_file = group_file_name(group);
@@ -296,16 +376,29 @@ int main() {
         }
         case 3: {
             int option;
-            cout << "To see all students records sorted by average grade enter 0 or enter the group number to see sorted records of the students in the group" << endl;
+            string order;
+            cout << "To see all students records sorted by average grade enter 0.";
+            cout << "To see sorted combined group enter 9";
+            cout << "Enter the group number to see sorted records of the students in the group" << endl;
             cin >> option;
+            if (cin.fail()) {
+                cout << "Invalid input" << endl;
+                return 1;
+            }
+            cout << "Enter in which order to sort the records (ascending or descending)" << endl;
+            cin >> order;
             if (option > 0 && option < 9) {
                 string group_file = group_file_name(option);
-                sort_students(group_file, "average_grade");
+                sort_students(group_file, "average_grade", order);
                 show_records(group_file);
             }
-            else if (option == 0){
-                sort_students("all.txt", "average_grade");
+            else if (option == 0) {
+                sort_students("all.txt", "average_grade",order);
                 show_records("all.txt");
+            }
+            else if (option == 9) {
+                sort_students("combine.txt", "faculty_number", order);
+                show_records("combine.txt");
             }
             else {
                 cout << "Invalid choice";
@@ -314,16 +407,29 @@ int main() {
         }
         case 4: {
             int option;
-            cout << "To see all students records sorted by faculty number enter 0 or enter the group number to see sorted records of the students in the group" << endl;
+            string order;
+            cout << "To see all students records sorted by faculty number enter 0.";
+            cout << "To see sorted combined group enter 9.";
+            cout << "Or enter the group number to see sorted records of the students in the group" << endl;
             cin >> option;
+            if (cin.fail()) {
+                cout << "Invalid input" << endl;
+                return 1;
+            }
+            cout << "Enter in which order to sort the records (ascending or descending)" << endl;
+            cin >> order;
             if (option > 0 && option < 9) {
                 string group_file = group_file_name(option);
-                sort_students(group_file, "faculty_number");
+                sort_students(group_file, "faculty_number", order);
                 show_records(group_file);
             }
             else if (option == 0) {
-                sort_students("all.txt", "faculty_number");
+                sort_students("all.txt", "faculty_number", order);
                 show_records("all.txt");
+            }
+            else if (option == 9) {
+                sort_students("combine.txt", "faculty_number", order);
+                show_records("combine.txt");
             }
             else {
                 cout << "Invalid choice";
@@ -332,8 +438,14 @@ int main() {
         }
         case 5: {
             int option;
-            cout << "To see all students records enter 0 or enter the group number to see records of the students in the group" << endl;
+            cout << "To see all students records enter 0. ";
+            cout << "To see combined records enter 9. ";
+            cout << "Or enter the group number to see records of the students in the group" << endl;
             cin >> option;
+            if (cin.fail()) {
+                cout << "Invalid input" << endl;
+                return 1;
+            }
             if (option > 0 && option < 9) {
                 string group_file = group_file_name(option);
                 show_records(group_file);
@@ -341,18 +453,59 @@ int main() {
             else if (option == 0) {
                 show_records("all.txt");
             }
+            else if (option == 9) {
+                show_records("combine.txt");
+            }
             else {
                 cout << "Invalid choice";
             }
             break;
         }
         case 6: {
+            int num_groups;
+            cout << "Enter how many groups you want to combine (between 2 and 7).";
+            cout << "If you want to see all combined choose \"Show records\" and enter 0" << endl;
+            cin >> num_groups;
+            if (cin.fail()) {
+                cout << "Invalid input" << endl;
+                return 1;
+            }
+            if (num_groups < 2 || num_groups > 7) {
+                cout << "Invalid number of groups" << endl;
+            }
+            else {
+                int temp = 0, index = 0;
+                bool is_fine = 1;
+                int* groups = new int[num_groups];
+                while(index < num_groups) {
+                    cout << "Group: ";
+                    cin >> temp;
+                    if (cin.fail()) {
+                        cout << "Invalid input" << endl;
+                        return 1;
+                    }
+                    if (temp > 0 && temp < 9) {
+                        groups[index] = temp;
+                        temp = 0;
+                        index++;
+                    }
+                    else {
+                        cout << "Invalid group" << endl;
+                        is_fine = 0;
+                    }
+                }
+                if (is_fine) {
+                  combine_groups(groups, num_groups);
+                }
+            }
+            break;
+        }
+        case 7: {
             exit(0);
         }
         default:
-            cout << "Invalid Choice";
+            cout << "Invalid choice";
         }
-    } while (choice != 6);
+    } while (choice != 7);
     return 0;
 }
-
