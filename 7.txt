@@ -1,0 +1,10 @@
+7001 7 Andrei Ivanov Danov 4 5.925 Algebra 6 DIS 5.9 DSTR 6 UP 5.8 
+7745 7 Mira Bojilova Dragomirova 2 4.1 Algebra 4 DIS 4.2 
+7298 7 Todor Nedyalkov Baldjiev 1 6 Up 6 
+7136 7 Aleksandra Atanasova Mateva 5 4.28 Algebra 3 DIS 3.8 DSTR 4.6 UP 6 Praktikum 4 
+7493 7 Iren Pavlova Smolichka 2 5.35 English 5.6 DIS 5.1 
+7555 7 Marti Kirilov Dimitrov 3 4.9 Algebra 4.7 DIS 6 DSTR 4 
+7022 7 Rada Grisheva Zlatkova 1 4.5 UP 4.5 
+7311 7 Rositza Michailova Michailova 2 5.5 Algebra 5 DIS 6 
+7944 7 Georgi Yordanov Iglikin 4 3.4 Algebra 3 DIS 3.2 DSTR 3.4 UP 4 
+7482 7 Hristina Mladjova Bojidarova 2 4.45 Algebra 3.9 DIS 5 
