@@ -1,0 +1,10 @@
+5342 5 Asen Zdravkov Dimov 3 5.13333 Algebra 5 DIS 4.6 DSTR 5.8 
+5023 5 Zornica Lavarova Shumanova 5 5.18 Algebra 4.4 DIS 4.8 DSTR 5 UP 6 English 5.7 
+5769 5 Mladen Ivanov Kiselov 2 5.35 DIS 6 DSTR 4.7 
+5566 5 Pavel Andreev Galev 1 4 DIS 4 
+5002 5 Plamen Qsenov Siderov 3 6 Algebra 6 DIS 6 DSTR 6 
+5122 5 Iva Mateeva Nencheva 2 5.65 UP 6 ALgebra 5.3 
+5555 5 Stefan Vasilev Trifanov 5 5.442 Algebra 5.3 DIS 4.9 DSTR 5.11 UP 5.9 English 6 
+5776 5 Albena Peeva Peeva 2 4.8 DIS 4.7 DSTR 4.9 
+5338 5 Kiril Georgiev Stanchev 1 4 Algebra 4 
+5471 5 Veneta Ilieva Atanasova 4 5.15 Algebra 5.2 DIS 6 DSTR 5.4 UP 4 
