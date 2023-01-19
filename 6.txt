@@ -1,0 +1,10 @@
+6011 6 Boris Hirstov Raychev 2 5.5 Algebra 5 UP 6 
+6238 6 Yana Grigorova Koleva 3 5.76667 DIS 5.5 DSTR 5.8 English 6 
+6033 6 Antoniq Petrova Veselinova 1 5 DSTR 5 
+6666 6 Kostadin Ivanov Halachev 6 5.25 Algebra 4 DIS 4.5 DSTR 6 UP 5.3 English 6 Praktikum 5.7 
+6772 6 Boiko Siderov Asparuhov 2 3.5 UP 3 English 4 
+6002 6 Michail Marinkov Tzankov 3 5.8 Algebra 6 DIS 5.8 DSTR 5.6 
+6897 6 Raya Lubomirova Krasteva 1 3 DIS 3 
+6223 6 Kaloyan Penkov Petkov 4 5.075 Algebra 4 DIS 5 DSTR 5.3 UP 6 
+6633 6 Maksim Antonov Uzunov 2 5.5 Englis 6 Algebra 5 
+6455 6 Simo Radoslavov Barakov 3 3.43333 UP 3.8 DIS 3.5 DSTR 3 
