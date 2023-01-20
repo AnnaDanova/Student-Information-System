@@ -127,7 +127,8 @@ int add_student(int group, string group_name) {
     return 0;
 }
 
-const int set_fn = 6, set_group = 6, set_name = 20, set_avg = 8, set_course_grade = 16, set_between = 10;
+void show_records(string file_name) {
+    const int set_fn = 6, set_group = 6, set_name = 20, set_avg = 8, set_course_grade = 16, set_between = 10;
     ifstream file;
     file.open(file_name, ios::in);
     string line;
@@ -175,7 +176,7 @@ int delete_from_all(int faculty_num, string file_name) {
     string line;
     while (getline(file, line)) {
         if (!line.empty()) {
-            string data[2];//we need only the faculty number and the group of the student
+            string data[2];//we need only the faculty number and the group of the student  
             stringstream stream(line);
             getline(stream, data[0], ' ');//data[0] - the faculty name
             s.faculty_number = stoi(data[0]);
@@ -188,7 +189,7 @@ int delete_from_all(int faculty_num, string file_name) {
                 group = s.group;
             }
         }
-    }        
+    }
     temp.close();
     file.close();
     remove(file_name.c_str());
@@ -207,21 +208,21 @@ void delete_from_group(string file_name, int faculty_num) {
     temp.open("temp.txt");
     string line;
     while (getline(file, line)) {
-         if (!line.empty()) {
-             string data[1];//we need only the faculty number
-             stringstream stream(line);
-             getline(stream, data[0], ' ');
-             s.faculty_number = stoi(data[0]);
-             if (faculty_num != s.faculty_number) {
-                 temp << line << endl;
-             }
-         }
+        if (!line.empty()) {
+            string data[1];//we need only the faculty number
+            stringstream stream(line);
+            getline(stream, data[0], ' ');
+            s.faculty_number = stoi(data[0]);
+            if (faculty_num != s.faculty_number) {
+                temp << line << endl;
+            }
+        }
     }
     temp.close();
     file.close();
     remove(file_name.c_str());
     if (rename("temp.txt", file_name.c_str()) != 0) {
-       cout << "Error while renaming the file";
+        cout << "Error while renaming the file";
     }
 }
 
@@ -317,7 +318,7 @@ void sort_students(string file_name, string option, string order) {
     if (option == "faculty_number") {
        sort_by_faculty_number(s, record_count, order);
     }
-    else if (option == "average_grade"){
+    else if (option == "average_grade") {
        sort_by_average_grade(s, record_count, order);
     }
     for (int i = 0; i < record_count; i++) {
