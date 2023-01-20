@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <iomanip>
 using namespace std;
 
 struct Student {
@@ -126,13 +127,39 @@ int add_student(int group, string group_name) {
     return 0;
 }
 
-void show_records(string file_name) {
+const int set_fn = 6, set_group = 6, set_name = 20, set_avg = 8, set_course_grade = 16, set_between = 10;
     ifstream file;
     file.open(file_name, ios::in);
     string line;
+    cout << left;
+    cout << setw(set_fn) << "Fn" << setw(set_group) << "Group" << setw(set_name) << "First name"
+        << setw(set_name) << "Middle name" << setw(set_name) << "Last name"
+        << setw(set_avg) << "Avg" << setw(set_course_grade) << "Course - grade" << endl;
     while (getline(file, line)) {
-        if (!line.empty()){
-            cout << line << endl;
+        if (!line.empty()) {
+            const int max_num_of_info = 27;
+            string data[max_num_of_info];
+            int word_counter = 0;
+            stringstream stream(line);
+            while (getline(stream, data[word_counter], ' ')) {
+                word_counter++;
+            }
+            int word_index = 0;
+            cout << setw(set_fn) << stoi(data[word_index]);
+            cout << setw(set_group) << stoi(data[++word_index]);
+            cout << setw(set_name) << data[++word_index];
+            cout << setw(set_name) << data[++word_index];
+            cout << setw(set_name) << data[++word_index];
+            int num_of_courses = stoi(data[++word_index]);
+            double average_grade = stod(data[++word_index]);
+            cout << setw(set_avg) << setprecision(3) << average_grade;
+            for (int course_index = 0; course_index < num_of_courses; course_index++) {
+                string course = data[++word_index];
+                string grade = data[++word_index];
+                course = course + " - " + grade;
+                cout << setw(set_course_grade) << course << setw(set_between);
+            }
+            cout << endl;
         }
     }
     file.close();
@@ -266,22 +293,22 @@ void sort_students(string file_name, string option, string order) {
         if (!line[record_count].empty()) {
             const int max_num_of_info = 27;
             string data[max_num_of_info];
-            int i = 0;
+            int word_count = 0;
             stringstream stream(line[record_count]);
-            while (getline(stream, data[i], ' ')) {
-                i++;
+            while (getline(stream, data[word_count], ' ')) {
+                word_count++;
             }
-            int j = 0;
-            s[record_count].faculty_number = stoi(data[j]);
-            s[record_count].group = stoi(data[++j]);
-            s[record_count].first_name = data[++j];
-            s[record_count].middle_name = data[++j];
-            s[record_count].last_name = data[++j];
-            s[record_count].num_of_courses = stoi(data[++j]);
-            s[record_count].average_grade = stod(data[++j]);
+            int word_index = 0;
+            s[record_count].faculty_number = stoi(data[word_index]);
+            s[record_count].group = stoi(data[++word_index]);
+            s[record_count].first_name = data[++word_index];
+            s[record_count].middle_name = data[++word_index];
+            s[record_count].last_name = data[++word_index];
+            s[record_count].num_of_courses = stoi(data[++word_index]);
+            s[record_count].average_grade = stod(data[++word_index]);
             for (int course_index = 0; course_index < s[record_count].num_of_courses; course_index++) {
-                s[record_count].courses[course_index] = data[++j];
-                s[record_count].grades[course_index] = stod(data[++j]);
+                s[record_count].courses[course_index] = data[++word_index];
+                s[record_count].grades[course_index] = stod(data[++word_index]);
             }
             record_count++;
         }
@@ -290,7 +317,7 @@ void sort_students(string file_name, string option, string order) {
     if (option == "faculty_number") {
        sort_by_faculty_number(s, record_count, order);
     }
-    else {
+    else if (option == "average_grade"){
        sort_by_average_grade(s, record_count, order);
     }
     for (int i = 0; i < record_count; i++) {
@@ -362,7 +389,7 @@ int main() {
             cin >> faculty_num;
             if (cin.fail()) {
                 cout << "Invalid input" << endl;
-                return 11;;
+                return 1;
             }
             int group = delete_from_all(faculty_num, "all.txt");
             if (group > 0 && group < 9) {
@@ -377,8 +404,8 @@ int main() {
         case 3: {
             int option;
             string order;
-            cout << "To see all students records sorted by average grade enter 0.";
-            cout << "To see sorted combined group enter 9";
+            cout << "To see all students records sorted by average grade enter 0. ";
+            cout << "To see sorted combined group enter 9. ";
             cout << "Enter the group number to see sorted records of the students in the group" << endl;
             cin >> option;
             if (cin.fail()) {
@@ -397,7 +424,7 @@ int main() {
                 show_records("all.txt");
             }
             else if (option == 9) {
-                sort_students("combine.txt", "faculty_number", order);
+                sort_students("combine.txt", "average_grade", order);
                 show_records("combine.txt");
             }
             else {
@@ -408,8 +435,8 @@ int main() {
         case 4: {
             int option;
             string order;
-            cout << "To see all students records sorted by faculty number enter 0.";
-            cout << "To see sorted combined group enter 9.";
+            cout << "To see all students records sorted by faculty number enter 0. ";
+            cout << "To see sorted combined group enter 9. ";
             cout << "Or enter the group number to see sorted records of the students in the group" << endl;
             cin >> option;
             if (cin.fail()) {
